@@ -1,3 +1,7 @@
+var zeroType = function(scope) {
+  return "";
+};
+
 var oneFiveType = function(numberScope, currentNum) {
   var buildRoman1to5 = "";
   if (currentNum <= 3) {
@@ -34,7 +38,10 @@ var sixNineType = function(numberScope, currentNum) {
 var generateRoman = function(numberScope, currentNum) {
   currentNum = parseInt(currentNum);
   var buildRomanNumeral = "";
-  if (currentNum > 0 && currentNum <= 5) {
+  if (currentNum === 0) {
+    buildRomanNumeral += zeroType(numberScope)
+  }
+  else if (currentNum > 0 && currentNum <= 5) {
     buildRomanNumeral += oneFiveType(numberScope, currentNum);
   }
   else {
