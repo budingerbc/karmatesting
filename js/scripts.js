@@ -14,18 +14,44 @@ var oneThroughFive = function(number) {
   return buildRoman1to5;
 };
 
-var sixThroughNine = function() {
-  
+var sixThroughNine = function(number) {
+  var buildRoman6to9 = "";
+  if (number > 5 && number <= 8) {
+    buildRoman6to9 += "V";
+    for (i = number; i > 5; i--) {
+      buildRoman6to9 += "I";
+    }
+  }
+  else {
+    if (number === 9) {
+      buildRoman6to9 += "I";
+    }
+    buildRoman6to9 += "X";
+  }
+  return buildRoman6to9;
+};
+
+var findLastNumber = function(number) {
+  digits = number.length;
+  return parseInt(number[digits - 1]);
+};
+
+var arrayOfNumbers = function(number) {
+  return number.split("");
 };
 
 var arabicToRoman = function(number) {
+  var numberArray = arrayOfNumbers(number);
+  var lastNumber = findLastNumber(numberArray);
+  console.log(lastNumber);
+
   var buildRoman = "";
 
-  if (number > 0 && number <= 5) {
-    buildRoman += oneThroughFive(number);
+  if (lastNumber > 0 && lastNumber <= 5) {
+    buildRoman += oneThroughFive(lastNumber);
   }
   else {
-    buildRoman += sixThroughNine(number);
+    buildRoman += sixThroughNine(lastNumber);
   }
   return buildRoman;
 };
@@ -34,7 +60,7 @@ var arabicToRoman = function(number) {
 $(function() {
   $("#userInput").submit(function(event) {
     event.preventDefault();
-    var arabic = parseInt($("#arabicNumeral").val());
+    var arabic = $("#arabicNumeral").val();
     var outputRoman = arabicToRoman(arabic);
 
     $("#output").text(outputRoman);
