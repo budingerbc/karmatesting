@@ -5,17 +5,28 @@ var oneThroughFive = function(number) {
       buildRoman1to5 += "I";
     }
   }
-  else if (number > 3 && number <= 5) {
+  else {
     if (number === 4) {
       buildRoman1to5 += "I";
     }
     buildRoman1to5 += "V";
   }
+  return buildRoman1to5;
+};
+
+var sixThroughNine = function() {
+  
 };
 
 var arabicToRoman = function(number) {
   var buildRoman = "";
-  buildRoman += 
+
+  if (number > 0 && number <= 5) {
+    buildRoman += oneThroughFive(number);
+  }
+  else {
+    buildRoman += sixThroughNine(number);
+  }
   return buildRoman;
 };
 
@@ -23,7 +34,7 @@ var arabicToRoman = function(number) {
 $(function() {
   $("#userInput").submit(function(event) {
     event.preventDefault();
-    var arabic = $("#arabicNumeral").val();
+    var arabic = parseInt($("#arabicNumeral").val());
     var outputRoman = arabicToRoman(arabic);
 
     $("#output").text(outputRoman);
