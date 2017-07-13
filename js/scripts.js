@@ -47,7 +47,6 @@ var generateRoman = function(numberScope, currentNum) {
   else {
     buildRomanNumeral += sixNineType(numberScope, currentNum);
   }
-  console.log(buildRomanNumeral);
   return buildRomanNumeral;
 };
 
@@ -61,19 +60,16 @@ var findScope = function(pointer) {
   var scopeArray = [];
 
   if (pointer === 1) {
-    scopeArray[0] = "I";
-    scopeArray[1] = "V";
-    scopeArray[2] = "X";
+    scopeArray = ["I", "V", "X"];
   }
   else if (pointer === 2) {
-    scopeArray[0] = "X";
-    scopeArray[1] = "L";
-    scopeArray[2] = "C";
+    scopeArray = ["X", "L", "C"];
   }
   else if (pointer === 3) {
-    scopeArray[0] = "C";
-    scopeArray[1] = "D";
-    scopeArray[2] = "M";
+    scopeArray = ["C", "D", "M"];
+  }
+  else if (pointer === 4) {
+    scopeArray = ["M"];
   }
   else {
     return [0, 0, 0];
@@ -109,12 +105,28 @@ var arabicToRoman = function(number) {
   return buildRoman;
 };
 
+var validateInput = function(input) {
+  if (input > 0 && input < 4000) {
+    return true;
+  }
+  else {
+    return false;
+  }
+};
+
 // Main method calls Roman Numeral Generator and outputs result.
 $(function() {
   $("#userInput").submit(function(event) {
     event.preventDefault();
     var arabic = $("#arabicNumeral").val();
-    var outputRoman = arabicToRoman(arabic);
+    var outputRoman;
+
+    if (validateInput(arabic)) {
+      outputRoman = arabicToRoman(arabic);
+    }
+    else {
+      outputRoman = "Not Valid Input."
+    }
 
     $("#output").text(outputRoman);
   });
