@@ -43,13 +43,13 @@ RomanNumeral.prototype.generateRoman = function(numberScope, currentNum) {
   currentNum = parseInt(currentNum);
   var buildRomanNumeral = "";
   if (currentNum === 0) {
-    buildRomanNumeral += zeroType(numberScope);
+    buildRomanNumeral += this.zeroType(numberScope);
   }
   else if (currentNum > 0 && currentNum <= 5) {
-    buildRomanNumeral += oneFiveType(numberScope, currentNum);
+    buildRomanNumeral += this.oneFiveType(numberScope, currentNum);
   }
   else {
-    buildRomanNumeral += sixNineType(numberScope, currentNum);
+    buildRomanNumeral += this.sixNineType(numberScope, currentNum);
   }
   return buildRomanNumeral;
 };
@@ -94,16 +94,16 @@ RomanNumeral.prototype.arrayOfNumbers = function(number) {
 };
 
 RomanNumeral.prototype.arabicToRoman = function() {
-  var numberArray = arrayOfNumbers(this.number);
-  var arrayLength = lengthOfArray(numberArray);
+  var numberArray = this.arrayOfNumbers(this.number);
+  var arrayLength = this.lengthOfArray(numberArray);
   var buildRoman = "";
 
   for (var j = arrayLength; j > 0; j--) {
     var k = arrayLength - j;
-    var currentNumber = findPointerNumber(k, numberArray);
+    var currentNumber = this.findPointerNumber(k, numberArray);
     currentNumber = parseInt(currentNumber);
-    var numberScope = findScope(j);
-    buildRoman += generateRoman(numberScope, currentNumber);
+    var numberScope = this.findScope(j);
+    buildRoman += this.generateRoman(numberScope, currentNumber);
   }
 
   return buildRoman;
