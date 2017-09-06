@@ -1,8 +1,12 @@
-var zeroType = function(scope) {
+function RomanNumeral(number) {
+  this.number = number;
+}
+
+RomanNumeral.prototype.zeroType = function(scope) {
   return "";
 };
 
-var oneFiveType = function(numberScope, currentNum) {
+RomanNumeral.prototype.oneFiveType = function(numberScope, currentNum) {
   var buildRoman1to5 = "";
   if (currentNum <= 3) {
     for (i = 0; i < currentNum; i++) {
@@ -18,7 +22,7 @@ var oneFiveType = function(numberScope, currentNum) {
   return buildRoman1to5;
 };
 
-var sixNineType = function(numberScope, currentNum) {
+RomanNumeral.prototype.sixNineType = function(numberScope, currentNum) {
   var buildRoman6to9 = "";
   if (currentNum > 5 && currentNum <= 8) {
     buildRoman6to9 += numberScope[1];
@@ -35,11 +39,11 @@ var sixNineType = function(numberScope, currentNum) {
   return buildRoman6to9;
 };
 
-var generateRoman = function(numberScope, currentNum) {
+RomanNumeral.prototype.generateRoman = function(numberScope, currentNum) {
   currentNum = parseInt(currentNum);
   var buildRomanNumeral = "";
   if (currentNum === 0) {
-    buildRomanNumeral += zeroType(numberScope)
+    buildRomanNumeral += zeroType(numberScope);
   }
   else if (currentNum > 0 && currentNum <= 5) {
     buildRomanNumeral += oneFiveType(numberScope, currentNum);
@@ -50,12 +54,12 @@ var generateRoman = function(numberScope, currentNum) {
   return buildRomanNumeral;
 };
 
-var findLastNumber = function(number) {
+RomanNumeral.prototype.findLastNumber = function(number) {
   digits = number.length;
   return parseInt(number[digits - 1]);
 };
 
-var findScope = function(pointer) {
+RomanNumeral.prototype.findScope = function(pointer) {
   // alpha is 1s digit; beta is 5s digit; gamma is 10s digit
   var scopeArray = [];
 
@@ -77,20 +81,20 @@ var findScope = function(pointer) {
   return scopeArray;
 };
 
-var findPointerNumber = function(pointer, number) {
-  return parseInt(number[pointer])
+RomanNumeral.prototype.findPointerNumber = function(pointer, number) {
+  return parseInt(number[pointer]);
 };
 
-var lengthOfArray = function(array) {
+RomanNumeral.prototype.lengthOfArray = function(array) {
   return array.length;
 };
 
-var arrayOfNumbers = function(number) {
+RomanNumeral.prototype.arrayOfNumbers = function(number) {
   return number.split("");
 };
 
-var arabicToRoman = function(number) {
-  var numberArray = arrayOfNumbers(number);
+RomanNumeral.prototype.arabicToRoman = function() {
+  var numberArray = arrayOfNumbers(this.number);
   var arrayLength = lengthOfArray(numberArray);
   var buildRoman = "";
 
@@ -105,8 +109,8 @@ var arabicToRoman = function(number) {
   return buildRoman;
 };
 
-var validateInput = function(input) {
-  if (input > 0 && input < 4000) {
+RomanNumeral.prototype.validateInput = function() {
+  if (this.number > 0 && this.number < 4000) {
     return true;
   }
   else {
@@ -114,20 +118,4 @@ var validateInput = function(input) {
   }
 };
 
-// Main method calls Roman Numeral Generator and outputs result.
-$(function() {
-  $("#userInput").submit(function(event) {
-    event.preventDefault();
-    var arabic = $("#arabicNumeral").val();
-    var outputRoman;
-
-    if (validateInput(arabic)) {
-      outputRoman = arabicToRoman(arabic);
-    }
-    else {
-      outputRoman = "Not Valid Input."
-    }
-
-    $("#output").text(outputRoman);
-  });
-});
+exports.romanNumeralModule = RomanNumeral;
