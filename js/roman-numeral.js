@@ -90,6 +90,7 @@ RomanNumeral.prototype.lengthOfArray = function(array) {
 };
 
 RomanNumeral.prototype.arrayOfNumbers = function(number) {
+  number = number.toString();
   return number.split("");
 };
 
